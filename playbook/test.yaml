@@ -1,13 +1,10 @@
-
+---
 
 - name: Testing
   hosts: laptop
   tasks:
   - name: Ping localhost
     ansible.builtin.ping:
-- name: Test echo
-  hosts: laptop
-  tasks:
   - name: Echo Hello World
     ansible.builtin.debug:
       msg: "Hello World from Ansible"
