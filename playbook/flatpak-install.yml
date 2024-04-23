@@ -4,11 +4,19 @@
   hosts: laptop
   become: true
   tasks:
-  - name: Install flatpak software
+
+  - name: Add the flathub flatpak repository remote to the user installation
     community.general.flatpak_remote:
+      name: flathub
+      state: present
+      flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+      method: user
+  - name: Install flatpak software
+    community.general.flatpak:
       name:
         - com.slack.Slack
         - com.discordapp.Discord
         - us.zoom.Zoom
         - md.obsidian.Obsidian
+      method: user
       state: present
