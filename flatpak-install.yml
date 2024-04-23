@@ -1,0 +1,14 @@
+---
+
+- name: All flatpak sofware
+  hosts: laptop
+  become: true
+  tasks:
+  - name: Install flatpak software
+    community.general.snap:
+      name:
+        - com.slack.Slack
+        - com.discordapp.Discord
+        - us.zoom.Zoom
+        - md.obsidian.Obsidian
+      state: present
