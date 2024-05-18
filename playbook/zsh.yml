@@ -22,3 +22,9 @@
     - name: Installing oh-my-zsh
       command: ~/install-ohmyzsh.sh
       when: zsh_install_directory.stat.exists == false
+
+    - name: Deleting oh-my-zsh install.sh
+      file:
+        path: ~/install-ohmyzsh.sh
+        state: absent
+
