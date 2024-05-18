@@ -1,22 +1,24 @@
-
 ---
+
 - name: oh-my-zsh install 
   hosts: laptop
-  vars_file: ../vars/vars.yml
   tasks:
-  - name: Checking if oh-my-zsh is installed
-    stat:
-      path: "{{ home_directory }}/.oh-my-zsh"
-    register: zsh_install_directory
+    - name: Load variables
+      include_vars: ../vars/vars.yml
 
-  - name: Downloading oh-my-zsh
-    get_url:
-      url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-      dest: ~/install-ohmyzsh.sh
-      mode: +x
-    when: zsh_install_directory.stat.exists == false
-    register: install_ohmyzsh
+    - name: Checking if oh-my-zsh is installed
+      stat:
+        path: "{{ home_directory }}/.oh-my-zsh"
+      register: zsh_install_directory
 
-  - name: Installing oh-my-zsh
-    command: ~/install-ohmyzsh.sh
-    when: zsh_install_directory.stat.exists == false
+    - name: Downloading oh-my-zsh
+      get_url:
+        url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+        dest: ~/install-ohmyzsh.sh
+        mode: +x
+      when: zsh_install_directory.stat.exists == false
+      register: install_ohmyzsh
+
+    - name: Installing oh-my-zsh
+      command: ~/install-ohmyzsh.sh
+      when: zsh_install_directory.stat.exists == false

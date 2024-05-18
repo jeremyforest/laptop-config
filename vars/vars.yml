@@ -1,6 +1,6 @@
 
 username: jeremy
-home_directory: /home/{{username}}/
+home_directory: /home/{{ username }}/
 
 # GITHUB CREDS
 github_username: CHANGEME
