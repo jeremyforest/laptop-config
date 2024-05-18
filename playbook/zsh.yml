@@ -2,6 +2,7 @@
 ---
 - name: oh-my-zsh install 
   hosts: laptop
+  vars_file: ../vars/vars.yml
   tasks:
   - name: Checking if oh-my-zsh is installed
     stat:
