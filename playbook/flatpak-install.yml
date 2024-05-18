@@ -4,23 +4,18 @@
   hosts: laptop
   become: true
   tasks:
-  - name: Add the Gnome flatpak remote to the system installation
-    community.general.flatpak_remote:
-      name: gnome
-      state: present
-      flatpakrepo_url: https://sdk.gnome.org/gnome-apps.flatpakrepo
-  - name: Add the flathub flatpak repository remote to the user installation
+  - name: Add the flathub flatpak repository remote to the system 
     community.general.flatpak_remote:
       name: flathub
       state: present
       flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
-      method: user
-  - name: Install flatpak software
+      method: system
+  - name: Install flatpak softwares
     community.general.flatpak:
       name:
         - com.slack.Slack
         - com.discordapp.Discord
         - us.zoom.Zoom
         - md.obsidian.Obsidian
-      method: user
+      method: system 
       state: present
