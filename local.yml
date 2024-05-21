@@ -1,5 +1,4 @@
 ---
-
 - hosts: laptop
   become: true
   pre_tasks:
@@ -8,5 +7,8 @@
       changed_when: False
 
   tasks:
-    include: tasks/apt-update.yml
+    - include_tasks: tasks/apt-update.yml
+    - include_tasks: tasks/apt-upgrade.yml
+    - include_tasks: tasks/flatpak-install.yml
+    - include_tasks: tasks/zsh.yml
  

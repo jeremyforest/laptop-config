@@ -1,21 +1,17 @@
 ---
 
-- name: All flatpak sofware
-  hosts: laptop
-  become: true
-  tasks:
-  - name: Add the flathub flatpak repository remote to the system 
-    community.general.flatpak_remote:
-      name: flathub
-      state: present
-      flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
-      method: system
-  - name: Install flatpak softwares
-    community.general.flatpak:
-      name:
-        - com.slack.Slack
-        - com.discordapp.Discord
-        - us.zoom.Zoom
-        - md.obsidian.Obsidian
-      method: system 
-      state: present
+- name: Add the flathub flatpak repository remote to the system 
+  community.general.flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+    method: system
+- name: Install flatpak softwares
+  community.general.flatpak:
+    name:
+      - com.slack.Slack
+      - com.discordapp.Discord
+      - us.zoom.Zoom
+      - md.obsidian.Obsidian
+    method: system 
+    state: present
