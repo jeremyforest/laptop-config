@@ -1,0 +1,23 @@
+---
+
+- name: Apt-upgrade
+  ansible.builtin.apt:
+      update_cache: true
+      upgrade: true
+
+- name: Install apt packages
+  ansible.builtin.apt:
+    pkg:
+    - htop
+    - neovim
+    - tmux 
+    - zsh
+
+- name: Update all packages to their latest version
+  ansible.builtin.apt:
+    name: "*"
+    state: latest
+
+- name: Cleanup 
+  ansible.builtin.apt:
+    autoremove: true
