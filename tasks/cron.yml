@@ -5,6 +5,6 @@
     user="ansible" 
     name="ansible provision" 
     minute="*/10" 
-    job="/usr/bin/ansible-pull -o -U https://github.com/jeremyforest/laptop-config.git > /dev/null"
+    job="/usr/bin/ansible-pull -o -U https://github.com/jeremyforest/laptop-config.git"
 
 
