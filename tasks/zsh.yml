@@ -1,36 +1,32 @@
 ---
 
-- name: oh-my-zsh install 
-  hosts: laptop
-  tasks:
-    - name: Load variables
-      include_vars: ../vars/vars.yml
+- name: Checking if oh-my-zsh is installed
+  include_vars: ../vars/vars.yml
+  stat:
+    path: "{{ home_directory }}/.oh-my-zsh"
+  register: zsh_install_directory
 
-    - name: Checking if oh-my-zsh is installed
-      stat:
-        path: "{{ home_directory }}/.oh-my-zsh"
-      register: zsh_install_directory
+- name: Downloading oh-my-zsh
+  get_url:
+    url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    dest: ~/install-ohmyzsh.sh
+    mode: +x
+  when: zsh_install_directory.stat.exists == false
+  register: install_ohmyzsh
 
-    - name: Downloading oh-my-zsh
-      get_url:
-        url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-        dest: ~/install-ohmyzsh.sh
-        mode: +x
-      when: zsh_install_directory.stat.exists == false
-      register: install_ohmyzsh
+- name: Installing oh-my-zsh
+  command: ~/install-ohmyzsh.sh
+  when: zsh_install_directory.stat.exists == false
 
-    - name: Installing oh-my-zsh
-      command: ~/install-ohmyzsh.sh
-      when: zsh_install_directory.stat.exists == false
+- name: Deleting oh-my-zsh install.sh
+  file:
+    path: ~/install-ohmyzsh.sh
+    state: absent
 
-    - name: Deleting oh-my-zsh install.sh
-      file:
-        path: ~/install-ohmyzsh.sh
-        state: absent
-
-    - name: Copying .zshrc file
-      template:
-        src: ../files/.zshrc
-        dest: "{{ home_directory }}/.zshrc"
+- name: Copying .zshrc file
+  include_vars: ../vars/vars.yml
+  template:
+    src: ../files/.zshrc
+    dest: "{{ home_directory }}/.zshrc"
 
 
