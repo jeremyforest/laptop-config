@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: laptop 
   become: true
   pre_tasks:
     - name: update repositories
