@@ -29,3 +29,8 @@
   template:
     src: ../files/.zshrc
     dest: "{{ home_directory }}/.zshrc"
+
+- name: Make zsh the default shell
+  user:
+    name: {{ username }}
+    shell: "/bin/zsh"
