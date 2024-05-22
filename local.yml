@@ -9,6 +9,7 @@
   tasks:
     - include_tasks: tasks/user.yml
     - include_tasks: tasks/cron.yml
+    - include_tasks: tasks/apt-install.yml
     - include_tasks: tasks/apt-upgrade.yml
     - include_tasks: tasks/flatpak-install.yml
     - include_tasks: tasks/zsh.yml
