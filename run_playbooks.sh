@@ -1,2 +1,2 @@
-#!/usr/bin/env bash
-ansible-playbook -K -i inventory/inventory.ini local.yml
+#!/usr/bin/env bas
+ansible-playbook -K -o local.yml
