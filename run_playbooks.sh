@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-ansible-playbook -K local.yml
+ansible-playbook -K -J local.yml

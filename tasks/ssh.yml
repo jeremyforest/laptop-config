@@ -1,27 +1,26 @@
 ---
-- name: Load encrypted secrets
-  include_vars:
-    public_key: ../files/.ssh/id_ed25519.pub
-    private_key: ../files/.ssh/id_ed25519
-- name: Ensure .ssh directory exists.
-  file:
+- name: Load variables
+  include_vars: ../vars/vars.yml
+
+- name: Ensure ssh directory exists.
+  ansible.builtin.file:
     dest: "~/.ssh/"
     mode: 0700
     state: directory
 
 - name: Copy private SSH keys
   ansible.builtin.copy:
-    src: "{{ private_key}}"
-    dest: "~/.ssh/id_ed25519"
+    src: "../files/.ssh/id_ed25519"
+    dest: "/home/{{ username }}/.ssh/id_ed25519"
 
 - name: Copy public SSH keys
   ansible.builtin.copy:
-    src: "{{ public_key }}"
-    dest: "~/.ssh/id_ed25519.pub"
+    src: "../files/.ssh/id_ed25519.pub"
+    dest: "/home/{{ username }}/.ssh/id_ed25519.pub"
 
 - name: Set permissions on SSH private key
   ansible.builtin.file:
-    path: "~/.ssh/id_ed25519"
+    path: "/home/{{ username }}/.ssh/id_ed25519"
     state: file
     mode: "0600"
   become: true
