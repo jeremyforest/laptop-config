@@ -12,6 +12,7 @@
     - neovim
     - tmux 
     - zsh
+    - nfs-common 
 
 - name: Update all packages to their latest version
   ansible.builtin.apt:

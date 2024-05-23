@@ -1,0 +1,30 @@
+---
+
+- name: Mount NAS - jeremy
+  ansible.posix.mount:
+    path: /mnt/jeremy
+    src: 192.168.1.104:/mnt/truenas-prox-pool/jeremy
+    fstype: nfs 
+    opts: auto,vers=3
+    state: mounted
+
+- name: Mount NAS - commun
+  ansible.posix.mount:
+    path: /mnt/commun
+    src: 192.168.1.104:/mnt/truenas-prox-pool/commun
+    fstype: nfs 
+    opts: auto,vers=3
+ 
+- name: Mount NAS - photo
+  ansible.posix.mount:
+    path: /mnt/photo
+    src: 192.168.1.104:/mnt/truenas-prox-pool/photo
+    fstype: nfs 
+    opts: auto,vers=3
+ 
+- name: Mount NAS - video
+  ansible.posix.mount:
+    path: /mnt/video
+    src: 192.168.1.104:/mnt/truenas-prox-pool/video
+    fstype: nfs 
+    opts: auto,vers=3
