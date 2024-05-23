@@ -13,4 +13,5 @@
     - include_tasks: tasks/apt-upgrade.yml
     - include_tasks: tasks/flatpak-install.yml
     - include_tasks: tasks/zsh.yml
+    - include_tasks: tasks/ssh.yml
  

@@ -11,7 +11,7 @@ Using `ansible-pull` you can automatically pull this config, which will create a
  
 To run, run the following command replacing the laptop_name with your actual workstation name 
 ```
-ansible-pull -o -K -U https://github.com/jeremyforest/laptop-config.git
+ansible-pull -o -K -J -U https://github.com/jeremyforest/laptop-config.git
 ```
 
-Basically `-o` will check if there has been any modifications from last time. If not, then nothing happens. If so, the laptop is updated as per the ansible configuration. `-K` will ask you your sudo password to run the plays as root. 
+Basically `-o` will check if there has been any modifications from last time. If not, then nothing happens. If so, the laptop is updated as per the ansible configuration. `-K` will ask you your sudo password to run the plays as root. `-J` asks for the ansible-vault password for sensitive information.
