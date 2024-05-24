@@ -13,6 +13,7 @@
     - tmux 
     - zsh
     - nfs-common 
+    - alacritty
 
 - name: Update all packages to their latest version
   ansible.builtin.apt:
