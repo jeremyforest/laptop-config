@@ -102,7 +102,7 @@ alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias python=/usr/bin/python3
 # folder shortcut
 alias tutor='cd /mnt/jeremy/MiscProjects/eduLLM'
-
+alias space='sudo du -h --max-depth=1 / | sort -h 2> /dev/null'
 # PYTHON STUFF
 # poetry stuff
 fpath+=~/.zfunc
