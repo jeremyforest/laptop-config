@@ -1,4 +1,7 @@
 ---
+
+# Might have to also setup the authorized_user file here
+
 - name: Load variables
   include_vars: ../vars/vars.yml
 

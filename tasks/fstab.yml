@@ -14,13 +14,15 @@
     src: 192.168.1.104:/mnt/truenas-prox-pool/commun
     fstype: nfs 
     opts: auto,vers=3
- 
+    state: mounted
+
 - name: Mount NAS - photo
   ansible.posix.mount:
     path: /mnt/photo
     src: 192.168.1.104:/mnt/truenas-prox-pool/photo
     fstype: nfs 
     opts: auto,vers=3
+    state: mounted
  
 - name: Mount NAS - video
   ansible.posix.mount:
@@ -28,3 +30,4 @@
     src: 192.168.1.104:/mnt/truenas-prox-pool/video
     fstype: nfs 
     opts: auto,vers=3
+    state: mounted
