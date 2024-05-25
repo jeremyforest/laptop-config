@@ -1,0 +1,15 @@
+---
+
+- name: Install and run tabby via docker compose
+  community.docker.docker_container: 
+    name: tabby
+    image: tabbyml/tabby
+    restart_policy: unless-stopped
+    entrypoint: /opt/tabby/bin/tabby-cpu
+    command: serve --model StarCoder-1B
+    volumes: 
+      - "/home/jeremy/.tabby:/data"
+    ports:
+      - 8080:8080
+    state: started
+

@@ -1,0 +1,8 @@
+---
+
+- name: Install Mozilla Thunderbird
+  community.general.flatpak:
+    name:
+      - org.mozilla.Thunderbird
+    method: system 
+    state: present

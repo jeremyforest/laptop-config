@@ -1,0 +1,39 @@
+---
+
+- name: Load variables
+  include_vars: ../vars/vars.yml
+
+- name: neovim | remove vim packages via apt if it exists
+  become: true
+  ansible.builtin.apt:
+    name: vim
+    state: absent
+
+      # - name: Clone Neovim
+      # ansible.builtin.git:
+      # repo: 'https://github.com/neovim/neovim.git'
+      # dest: "/home/{{ username }}/neovim"
+
+      # - name: Build neovim
+      #   shell: "cd /home/{{ username }}/neovim && make CMAKE_BUILD_TYPE=Release"
+      # become: true
+
+      # - name: Install neovim
+      #   become: true
+      #   shell: "cd /home/{{ username }}/neovim && make install"
+
+- name: neovim | install nvim via apt
+  become: true
+  ansible.builtin.apt:
+    name: neovim
+    state: latest 
+
+- name: ensures the nvim folder exists to drop the config
+  file: 
+    path: /home/{{ username }}/.config/nvim 
+    state: directory
+
+- name: Copying neovim config 
+  ansible.builtin.copy:
+    src: ../files/.config/nvim
+    dest: /home/{{ username }}/.config/nvim
