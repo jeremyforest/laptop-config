@@ -1,5 +1,9 @@
 ---
 
+
+- name: load variables
+  include_vars: ../vars/vars.yml
+
 - name: Install and run tabby via docker compose
   community.docker.docker_container: 
     name: tabby
@@ -8,8 +12,8 @@
     entrypoint: /opt/tabby/bin/tabby-cpu
     command: serve --model StarCoder-1B
     volumes: 
-      - "/home/jeremy/.tabby:/data"
+      - "/home/jeremy/.tabby/data:/data"
     ports:
       - 8080:8080
     state: started
-
+  become_user: "{{ username }}"
