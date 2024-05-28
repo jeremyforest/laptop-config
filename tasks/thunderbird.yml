@@ -18,7 +18,12 @@
 
 - name: Copying thunderbird profile config
   ansible.builtin.copy:
-    src: ../files/.thunderbird/logins.json
-    dest: /home/{{ username }}/.thunderbird/{{ profile }}/logins.json
+    src: ../files/.thunderbird/{{ profile }}/
+    dest: /home/{{ username }}/.thunderbird/{{ profile }}/
+
+- name: Copying thunderbird profile init file
+  ansible.builtin.copy:
+    src: ../files/.thunderbird/profiles.ini
+    dest: /home/{{ username }}/.thunderbird/profiles.ini
 
 
