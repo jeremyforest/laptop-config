@@ -8,14 +8,13 @@
     state: present
 
 - name: Define profile variable
-  vars:
+  set_fact:
     profile: 9acjnte4.default-release
 
 - name: ensures the thunderbird folder exists to drop the config in
   file: 
     path: /home/{{ username }}/.thunderbird/{{ profile }}/
     state: directory
-
 
 - name: Copying thunderbird profile config
   ansible.builtin.copy:
