@@ -10,10 +10,7 @@
     pkg:
     - htop
     - neovim
-    - tmux 
-    - zsh
     - nfs-common 
-    - alacritty
     - cmake
     - gettext
 

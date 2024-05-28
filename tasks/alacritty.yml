@@ -1,0 +1,8 @@
+---
+
+
+- name: Install alacritty via apt
+  ansible.builtin.apt:
+    pkg:
+    - alacritty
+    state: present
