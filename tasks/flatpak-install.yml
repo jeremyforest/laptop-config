@@ -14,5 +14,6 @@
       - com.discordapp.Discord
       - us.zoom.Zoom
       - md.obsidian.Obsidian
+      - flathub org.gnome.DejaDup
     method: system 
     state: present
