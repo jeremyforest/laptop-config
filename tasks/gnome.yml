@@ -1,0 +1,23 @@
+---
+
+- name: Install python-psutil package
+  ansible.builtin.apt: 
+    name:
+      - python3-psutil
+
+- name: Load variables
+  include_vars: ../vars/vars.yml
+
+- name: Copy wallpaper file
+  ansible.builtin.copy: 
+    src : files/wallpaper.jpg 
+    dest : /home/{{ username }}/wallpaper.jpg 
+    owner : jeremy
+    group : jeremy
+    mode : 770
+
+- name: Set GNOME Wallpaper
+  become_user: jeremy
+  dconf: 
+    key : "/org/gnome/desktop/background/picture-uri-dark"
+    value : "'file:///home/{{ username }}/wallpaper.jpg'"
