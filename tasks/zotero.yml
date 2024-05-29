@@ -1,0 +1,9 @@
+---
+
+- name: Install Zotero using flatpak 
+  community.general.flatpak:
+    name:
+      - org.zotero.Zotero
+    method: system 
+    state: present
+
