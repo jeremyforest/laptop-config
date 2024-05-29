@@ -12,12 +12,33 @@
   ansible.builtin.copy: 
     src : files/wallpaper.jpg 
     dest : /home/{{ username }}/wallpaper.jpg 
-    owner : jeremy
-    group : jeremy
+    owner : jeremy 
+    group : jeremy 
     mode : 770
 
 - name: Set GNOME Wallpaper
-  become_user: jeremy
+  become_user: jeremy 
   dconf: 
     key : "/org/gnome/desktop/background/picture-uri-dark"
     value : "'file:///home/{{ username }}/wallpaper.jpg'"
+
+- name: Copy lockscreenfile file
+  ansible.builtin.copy: 
+    src : files/lockscreen.jpg 
+    dest : /home/{{ username }}/lockscreen.jpg 
+    owner : jeremy 
+    group : jeremy 
+    mode : 770
+
+- name: Set lock screen background
+  become_user: jeremy
+  dconf: 
+    key : "/org/gnome/desktop/screensaver/picture-uri" 
+    value : "'file:///home/{{ username }}/lockscreen.jpg'"
+
+- name: Set GNOME GTK theme
+  become_user: jeremy 
+  dconf: 
+    key : "/org/gnome/desktop/interface/gtk-theme" 
+    value : "'Valyrian'"
+    state: present
