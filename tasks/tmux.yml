@@ -12,8 +12,10 @@
   ansible.builtin.copy:
     src: ../files/.tmux.conf
     dest: /home/{{ username }}/.tmux.conf
+  become_user: jeremy 
 
 - name: Clone Tmux Plugin Manager
   ansible.builtin.git:
     repo: 'https://github.com/tmux-plugins/tpm'
     dest: "{{ home_directory }}/.tmux/plugins/tpm"
+  become_user: jeremy
