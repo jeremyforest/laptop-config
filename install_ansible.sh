@@ -6,3 +6,6 @@ sudo apt install -y ansible
 
 # Add the installation of the required ansible-galaxy dependencies
 ansible-galaxy install -r requirements.yml
+
+# Add the installation of external roles
+ansible-galaxy role install -p roles hurricanehrndz.nerdfonts

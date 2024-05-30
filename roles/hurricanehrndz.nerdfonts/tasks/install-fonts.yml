@@ -1,0 +1,66 @@
+---
+- name: '[Linux] Define nerdfonts_install_dir_prefix'
+  set_fact:
+    nerdfonts_install_dir_prefix: "{% if nerdfonts_user == 'root' %}/usr/{% else %}~/.{% endif %}"
+
+- name: '[Linux] Setting nerdfonts_install_dir for system-wide installation'
+  set_fact:
+    nerdfonts_install_dir: "{{ nerdfonts_install_dir_prefix }}local/share/fonts/NerdFonts"
+
+- name: '[Linux] Create NerdFonts folder for installation'
+  file:
+    path: "{{ nerdfonts_install_dir }}"
+    state: directory
+    mode: "0755"
+  become: yes
+  become_user: "{{ nerdfonts_user }}"
+
+- name: '[Linux] Check if there are any NerdFonts already installed'
+  stat:
+    path: "{{ nerdfonts_install_dir }}/{{ item.fontname }}"
+  become: yes
+  become_user: "{{ nerdfonts_user }}"
+  with_items: "{{ nerdfonts_fonts }}"
+  register: nerdfonts_stat
+
+- name: '[Linux] Define nerdfonts_exists - list of fontname and install status'
+  set_fact:
+    nerdfonts_exists: "{{ nerdfonts_exists|default([])|union([{'fontname': item.item.fontname, 'installed': item.stat.exists}]) }}"
+  with_items: "{{ nerdfonts_stat.results }}"
+
+- name: '[Linux] Define nerdfonts_install_status'
+  set_fact:
+    nerdfonts_install_statuses: "{{ nerdfonts_exists|map(attribute='installed')|list }}"
+
+- name: '[Linux] Define nerdfonts_install_cmd'
+  set_fact:
+    nerdfonts_install_cmd: "rsync -av --no-owner --prune-empty-dirs --include='*/' --include='*.ttf' --exclude='*'"
+
+- name: '[Linux] Checkout nerdfonts'
+  include_tasks: checkout-fonts.yml
+
+- name: "[Linux] Install NerdFonts"
+  command: "{{ nerdfonts_install_cmd }} {{ nerdfonts_git_dest }}/patched-fonts/{{ item.fontname }} {{ nerdfonts_install_dir }}"
+  become: yes
+  become_user: "{{ nerdfonts_user  }}"
+  register: nerdfonts_installation
+  notify: '[Linux] Update font cache'
+  when:
+    - not item.installed
+  with_items:
+    - "{{ nerdfonts_exists }}"
+
+- name: "[Linux] Remove Unwanted fonts"
+  command: find {{ nerdfonts_install_dir }} -name '*indows*.ttf' -exec rm {} \+
+  register: remove_windows_fonts
+  changed_when: remove_windows_fonts.stdout | length > 0
+  become: yes
+  become_user: "{{ nerdfonts_user  }}"
+
+- name: "[Linux] Remove mono fonts"
+  command: find {{ nerdfonts_install_dir }} -name '*Mono.ttf' -exec rm {} \+
+  register: remove_mono_fonts
+  changed_when: remove_mono_fonts.stdout | length > 0
+  become: yes
+  become_user: "{{ nerdfonts_user  }}"
+  when: not nerdfonts_mono

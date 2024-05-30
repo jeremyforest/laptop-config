@@ -1,0 +1,6 @@
+---
+# note: 'become: yes'(for Linux) or 'become: no'(for MacOS) included in OS-specific playbooks under 'include_tasks'
+- name: '[Dependencies] Install Dependencies for NerdFonts'
+  package:
+    name: "{{ nerdfonts_dependencies }}"
+    state: present

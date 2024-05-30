@@ -1,6 +1,8 @@
 ---
 - hosts: all
   become: true
+  remote_user: jeremy
+
   pre_tasks:
     - name: update repositories
       apt: update_cache=yes
