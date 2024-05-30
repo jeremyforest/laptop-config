@@ -21,3 +21,4 @@
     - include_tasks: tasks/docker.yml
     - include_tasks: tasks/tabby.yml
     - include_tasks: tasks/gnome.yml
+    - include_tasks: tasks/install-nerdfonts.yml

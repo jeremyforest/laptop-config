@@ -1,0 +1,5 @@
+---
+
+- name: Install nerdfonts
+  include_role:
+    name: ansible-nerdfonts
