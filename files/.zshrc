@@ -70,17 +70,13 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(ansible docker docker-compose fzf git poetry pre-commit python rsync tmux ubuntu)
+plugins=(ansible docker docker-compose git poetry pre-commit python rsync tmux ubuntu)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
 export PATH="/usr/local/bin:$PATH"
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -88,9 +84,6 @@ if [[ -n $SSH_CONNECTION ]]; then
 else
   export EDITOR='nvim'
 fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -100,9 +93,11 @@ fi
 alias zshconfig="nvim ~/.zshrc"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias python=/usr/bin/python3
+alias cat=bat
 # folder shortcut
 alias tutor='cd /mnt/jeremy/MiscProjects/eduLLM'
 alias space='sudo du -h --max-depth=1 / | sort -h 2> /dev/null'
+
 # PYTHON STUFF
 # poetry stuff
 fpath+=~/.zfunc
