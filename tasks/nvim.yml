@@ -9,19 +9,6 @@
     name: vim
     state: absent
 
-      # - name: Clone Neovim
-      # ansible.builtin.git:
-      # repo: 'https://github.com/neovim/neovim.git'
-      # dest: "/home/{{ username }}/neovim"
-
-      # - name: Build neovim
-      #   shell: "cd /home/{{ username }}/neovim && make CMAKE_BUILD_TYPE=Release"
-      # become: true
-
-      # - name: Install neovim
-      #   become: true
-      #   shell: "cd /home/{{ username }}/neovim && make install"
-
 - name: neovim | install nvim via apt
   become: true
   ansible.builtin.apt:
@@ -32,8 +19,10 @@
   file: 
     path: /home/{{ username }}/.config/nvim 
     state: directory
+  become_user: jeremy
 
 - name: Copying neovim config 
   ansible.builtin.copy:
     src: ../files/.config/nvim
     dest: /home/{{ username }}/.config/nvim
+  become_user: jeremy

@@ -1,7 +1,6 @@
 ---
 - hosts: all
   become: true
-  remote_user: jeremy
 
   pre_tasks:
     - name: update repositories
