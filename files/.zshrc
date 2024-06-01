@@ -94,9 +94,13 @@ alias zshconfig="nvim ~/.zshrc"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias python=/usr/bin/python3
 alias cat=batcat
+
 # folder shortcut
 alias tutor='cd /mnt/jeremy/MiscProjects/eduLLM'
 alias space='sudo du -h --max-depth=1 / | sort -h 2> /dev/null'
+
+# specific tmux aliases
+alias tls='tmux ls'
 
 # PYTHON STUFF
 # poetry stuff
