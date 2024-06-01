@@ -23,6 +23,6 @@
 
 - name: Copying neovim config 
   ansible.builtin.copy:
-    src: ../files/.config/nvim
+    src: ../files/.config/nvim/
     dest: /home/{{ username }}/.config/nvim
   become_user: jeremy
