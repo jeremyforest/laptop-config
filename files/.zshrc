@@ -98,7 +98,7 @@ alias cat=batcat
 
 # folder shortcut
 alias tutor='cd /mnt/jeremy/MiscProjects/eduLLM'
-alias space='sudo du -h --max-depth=1 / | sort -h 2> /dev/null'
+alias space='sudo du -h --max-depth=1 . | sort -h 2> /dev/null'
 
 # specific tmux aliases
 alias tls='tmux ls'
