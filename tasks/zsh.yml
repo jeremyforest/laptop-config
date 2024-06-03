@@ -27,13 +27,15 @@
 
 - name: Install zsh syntax highlighting
   ansible.builtin.git:
-    repo: 'https://github.com/zsh-users/zsh-syntax-highlighting.git'
-    dest: ~/.oh-my-zsh/custom  
+    repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git"
+    dest: "{{ home_directory }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+    clone: yes
 
 - name: Install zsh autosuggestions
   ansible.builtin.git:
-    repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
-    dest: ~/.oh-my-zsh/custom  
+    repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
+    dest: "{{ home_directory }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    clone: yes
 
 - name: Copying .zshrc file
   template:
