@@ -1,0 +1,20 @@
+---
+
+
+- name: nodejs - Load variables
+  include_vars: ../vars/vars.yml
+
+- name: nodejs - Downloading node 
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh
+    dest: ~/install.sh
+    mode: +x
+
+- name: nodejs - Installing node 
+  command: bash ~/install.sh
+
+- name: nodejs - Deleting node install.sh
+  file:
+    path: ~/install.sh
+    state: absent
+

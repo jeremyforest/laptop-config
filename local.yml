@@ -24,3 +24,4 @@
     - include_tasks: tasks/gnome.yml
     - include_tasks: tasks/install-nerdfonts.yml
     - include_tasks: tasks/python-package.yml
+    - include_tasks: tasks/nodejs.yml
