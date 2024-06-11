@@ -1,20 +1,18 @@
 ---
 
-
-- name: nodejs - Load variables
-  include_vars: ../vars/vars.yml
-
-- name: nodejs - Downloading node 
+- name: nodejs - Downloading nodeJS setup script
   ansible.builtin.get_url:
-    url: https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh
-    dest: ~/install.sh
+    url: https://deb.nodesource.com/setup_current.x
+    dest: ~/nodesource_setup.sh 
     mode: +x
+  tags: nodejs
 
-- name: nodejs - Installing node 
-  command: bash ~/install.sh
-
-- name: nodejs - Deleting node install.sh
-  file:
-    path: ~/install.sh
-    state: absent
-
+- name: nodejs - Running nodeJS install script
+  ansible.builtin.shell: bash ~/nodesource_setup.sh
+  tags: nodejs
+ 
+- name: nodejs - Install nodeJS
+  ansible.builtin.apt:
+    pkg:
+      - nodejs
+  tags: nodejs

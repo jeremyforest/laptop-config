@@ -1,8 +1,8 @@
 ---
 
-
 - name: load variables
   include_vars: ../vars/vars.yml
+  tags: tabby
 
 - name: Install and run tabby via docker compose
   community.docker.docker_container: 
@@ -17,3 +17,12 @@
       - 8080:8080
     state: started
   become_user: "{{ username }}"
+  tags: tabby
+
+- name: Copying tabby-client agent config
+  ansible.builtin.copy:
+    src: "../files/.tabby-client/agent/config.toml"
+    dest: "{{ home_directory }}/.tabby-client/agent/config.toml"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+  tags: tabby

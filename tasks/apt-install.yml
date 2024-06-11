@@ -16,12 +16,6 @@
     - bat
     state: present
 
-- name: Uninstall non-required package
-  ansible.builtin.apt:
-    pkg:
-    - nodejs
-    state: absent
-
 - name: Update all packages to their latest version
   ansible.builtin.apt:
     name: "*"
