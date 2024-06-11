@@ -1,0 +1,19 @@
+---
+
+
+- name: etcher - add to repo 
+  ansible.builtin.get_url:
+    url: https://dl.cloudsmith.io/public/balena/etcher/setup.deb.sh
+    dest: ~/etcher_install.sh 
+    mode: +x
+  tags: etcher
+
+- name: add etcher to repo
+  ansible.builtin.shell: bash ~/etcher_install.sh
+  tags: etcher
+
+- name: install etcher through apt
+  ansible.builtin.apt:
+    pkg:
+      - balena-etcher-electron
+  tags: etcher
