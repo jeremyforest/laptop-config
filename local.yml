@@ -5,7 +5,7 @@
   pre_tasks:
     - name: update repositories
       apt: update_cache=yes
-      changed_when: False
+      # changed_when: False
 
   tasks:
     - include_tasks: tasks/user.yml
@@ -25,3 +25,4 @@
     - include_tasks: tasks/install-nerdfonts.yml
     - include_tasks: tasks/python-package.yml
     - include_tasks: tasks/nodejs.yml
+    - include_tasks: tasks/wireguard.yml

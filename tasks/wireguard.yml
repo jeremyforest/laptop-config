@@ -1,0 +1,8 @@
+---
+
+
+- name: Wireguard - install wireguard throught apt
+  ansible.builtin.apt:
+    pkg:
+      - wireguard
+  tags: wireguard
