@@ -10,7 +10,7 @@
     image: tabbyml/tabby
     restart_policy: unless-stopped
     entrypoint: /opt/tabby/bin/tabby-cpu
-    command: serve --model StarCoder-1B
+    command: serve --model DeepSeekCoder-6.7B
     volumes: 
       - "/home/jeremy/.tabby/data:/data"
     ports:
