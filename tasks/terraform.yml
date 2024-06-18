@@ -1,0 +1,33 @@
+---
+
+
+- name: Load variables
+  include_vars: ../vars/vars.yml
+  tags: terraform
+
+- name: Add HashiCorp GPG key
+  ansible.builtin.apt_key:
+    url: https://apt.releases.hashicorp.com/gpg
+    state: present
+
+- name: add terraform repo to apt
+  ansible.builtin.apt_repository:
+    filename: terraform 
+    repo: "deb [arch=amd64] https://apt.releases.hashicorp.com jammy main"
+    state: present
+  tags: terraform
+
+- name: Install terraform through APT
+  ansible.builtin.apt:
+    name: terraform
+    state: present
+    update_cache: yes
+  tags: terraform
+
+- name: verify terraform install
+  ansible.builtin.command: terraform --version
+  register: terraform_version
+
+- name: Display Terraform version
+  debug:
+    ansible.builtin.msg: "Terraform version installed: {{ terraform_version.stdout }}"

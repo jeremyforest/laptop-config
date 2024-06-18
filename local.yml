@@ -27,3 +27,4 @@
     - include_tasks: tasks/nodejs.yml
     - include_tasks: tasks/wireguard.yml
     - include_tasks: tasks/etcher.yml
+    - include_tasks: tasks/terraform.yml
