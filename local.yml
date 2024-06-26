@@ -28,3 +28,8 @@
     - include_tasks: tasks/wireguard.yml
     - include_tasks: tasks/etcher.yml
     - include_tasks: tasks/terraform.yml
+    - include_tasks: tasks/steam.yml
+
+
+
+

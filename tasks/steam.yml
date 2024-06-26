@@ -1,0 +1,11 @@
+---
+
+
+- name: steam | load variables
+  include_vars: ../vars/vars.yml
+
+- name: steam | install steam via apt
+  become: true
+  ansible.builtin.apt:
+    name: steam 
+    state: latest 
