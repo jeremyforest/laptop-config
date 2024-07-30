@@ -6,6 +6,7 @@
     state: present
     flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
     method: system
+  tags: flatpak
 
 - name: Install flatpak softwares
   community.general.flatpak:
@@ -17,3 +18,4 @@
       - org.gnome.DejaDup
     method: system 
     state: present
+  tags: flatpak
