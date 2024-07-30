@@ -7,9 +7,10 @@
     - python3-pip
     state: present
 
-- name: Install python package
+- name: Install standard python package that are typically needed
   ansible.builtin.pip:
     name:
     - ipykernel 
     - notebook
+    - pre-commit
 
