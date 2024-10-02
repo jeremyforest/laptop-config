@@ -4,6 +4,7 @@
   ansible.builtin.apt:
       update_cache: true
       upgrade: true
+  when: ansible_os_family == "Debian"
 
 - name: Install apt packages
   ansible.builtin.apt:
@@ -15,12 +16,30 @@
     - gettext
     - bat
     state: present
+  when: ansible_os_family == "Debian"
 
 - name: Update all packages to their latest version
   ansible.builtin.apt:
     name: "*"
     state: latest
+  when: ansible_os_family == "Debian"
 
 - name: Cleanup 
   ansible.builtin.apt:
     autoremove: true
+  when: ansible_os_family == "Debian"
+
+
+- name: Install Homebrew packages (MacOS)
+  homebrew:
+    name:
+    - htop
+    - neovim
+    - cmake
+    - gettext
+    - bat
+    state: present
+  become: false
+  when: ansible_os_family == "Darwin"
+
+

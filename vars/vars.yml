@@ -1,4 +1,5 @@
 
-username: jeremy
-home_directory: /home/{{ username }}/
+username_linux: jeremy
+username_mac: jforest
+home_directory: home/{{ username }}/
 

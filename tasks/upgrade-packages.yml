@@ -1,15 +1,15 @@
 ---
 
-- name: Install Alacritty (Linux)
-  become: true
+- name: Apt-upgrade (Linux)
   ansible.builtin.apt:
-    name: alacritty
-    state: present
+    update_cache: true
+    upgrade: true
   when: ansible_os_family == "Debian"
 
-- name: Install Alacritty (macOS)
+- name: Homebrew upgrade (macOS)
   homebrew:
-    name: alacritty
-    state: present
+    update_homebrew: yes
+    upgrade: true
   when: ansible_os_family == "Darwin"
   become: false  # Ensure Homebrew tasks do not use sudo
+

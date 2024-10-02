@@ -3,26 +3,35 @@
 - name: Load variables
   include_vars: ../vars/vars.yml
 
-- name: neovim | remove vim packages via apt if it exists
+- name: neovim | remove vim packages via apt if it exists (Linux)
   become: true
   ansible.builtin.apt:
     name: vim
     state: absent
+  when: ansible_os_family == "Debian"
+
+- name: neovim | install nvim packages via homebrew (MacOS)
+  homebrew:
+    name: vim
+    state: present
+  when: ansible_os_family == "Darwin"
+  become: false
 
 - name: neovim | install nvim via apt
   become: true
   ansible.builtin.apt:
     name: neovim
     state: latest 
+  when: ansible_os_family == "Debian"
 
 - name: ensures the nvim folder exists to drop the config
-  file: 
-    path: /home/{{ username }}/.config/nvim 
+  file:
+    path: "{{ (ansible_os_family == 'Debian') | ternary('/home/' + username_linux + '/.config/nvim', '/Users/' + username_mac + '/.config/nvim') }}"
     state: directory
-  become_user: jeremy
+  become_user: "{{ (ansible_os_family == 'Debian') | ternary(username_linux, username_mac) }}"
 
 - name: Copying neovim config 
   ansible.builtin.copy:
     src: ../files/.config/nvim/
-    dest: /home/{{ username }}/.config/nvim
-  become_user: jeremy
+    dest: "{{ (ansible_os_family == 'Debian') | ternary('/home/' + username_linux + '/.config/nvim', '/Users/' + username_mac + '/.config/nvim') }}"
+  become_user: "{{ (ansible_os_family == 'Debian') | ternary(username_linux, username_mac) }}"

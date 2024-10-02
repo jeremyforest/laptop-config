@@ -5,44 +5,44 @@
 
 - name: Checking if oh-my-zsh is installed
   stat:
-    path: "{{ home_directory }}/.oh-my-zsh"
+    path: "{{ (ansible_os_family == 'Debian') | ternary('/home/' + username_linux + '/.oh-my-zsh', '/Users/' + username_mac + '/.oh-my-zsh') }}"
   register: zsh_install_directory
 
 - name: Downloading oh-my-zsh
   get_url:
     url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-    dest: ~/install-ohmyzsh.sh
+    dest: "{{ (ansible_os_family == 'Debian') | ternary('/home/' + username_linux, '/Users/' + username_mac) }}/install-ohmyzsh.sh"
     mode: +x
   when: zsh_install_directory.stat.exists == false
   register: install_ohmyzsh
 
 - name: Installing oh-my-zsh
-  command: ~/install-ohmyzsh.sh
+  command: "{{ (ansible_os_family == 'Debian') | ternary('/home/' + username_linux, '/Users/' + username_mac) }}/install-ohmyzsh.sh"
   when: zsh_install_directory.stat.exists == false
 
 - name: Deleting oh-my-zsh install.sh
   file:
-    path: ~/install-ohmyzsh.sh
+    path: "{{ (ansible_os_family == 'Debian') | ternary('/home/' + username_linux, '/Users/' + username_mac) }}/install-ohmyzsh.sh"
     state: absent
 
 - name: Install zsh syntax highlighting
   ansible.builtin.git:
     repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git"
-    dest: "{{ home_directory }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+    dest: "{{ (ansible_os_family == 'Debian') | ternary('/home/' + username_linux + '/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting', '/Users/' + username_mac + '/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting') }}"
     clone: yes
 
 - name: Install zsh autosuggestions
   ansible.builtin.git:
     repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
-    dest: "{{ home_directory }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    dest: "{{ (ansible_os_family == 'Debian') | ternary('/home/' + username_linux + '/.oh-my-zsh/custom/plugins/zsh-autosuggestions', '/Users/' + username_mac + '/.oh-my-zsh/custom/plugins/zsh-autosuggestions') }}"
     clone: yes
 
 - name: Copying .zshrc file
   template:
     src: ../files/.zshrc
-    dest: "{{ home_directory }}/.zshrc"
+    dest: "{{ (ansible_os_family == 'Debian') | ternary('/home/' + username_linux, '/Users/' + username_mac) }}/.zshrc"
 
 - name: Make zsh the default shell
   user:
-    name: "{{ username }}"
+    name: "{{ (ansible_os_family == 'Debian') | ternary(username_linux, username_mac) }}"
     shell: "/bin/zsh"

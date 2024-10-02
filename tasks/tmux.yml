@@ -3,19 +3,29 @@
 - name: Load variables
   include_vars: ../vars/vars.yml
 
-- name: Install tmux
+- name: Install tmux (Linux)
+  become: true
   ansible.builtin.apt:
     name: tmux
     state: present
+  when: ansible_os_family == "Debian"
 
-- name: Copying tmux config 
+- name: Install tmux (macOS)
+  homebrew:
+    name: tmux
+    state: present
+  when: ansible_os_family == "Darwin"
+  become: false  # Ensure Homebrew tasks do not use sudo
+
+- name: Copying tmux config
   ansible.builtin.copy:
     src: ../files/.tmux.conf
-    dest: /home/{{ username }}/.tmux.conf
-  become_user: jeremy 
+    dest: "{{ (ansible_os_family == 'Debian') | ternary('/home/' + username_linux, '/Users/' + username_mac) }}/.tmux.conf"
+  become_user: "{{ (ansible_os_family == 'Debian') | ternary(username_linux, username_mac) }}"
 
 - name: Clone Tmux Plugin Manager
   ansible.builtin.git:
     repo: 'https://github.com/tmux-plugins/tpm'
-    dest: "{{ home_directory }}/.tmux/plugins/tpm"
-  become_user: jeremy
+    dest: "{{ (ansible_os_family == 'Debian') | ternary('/home/' + username_linux, '/Users/' + username_mac) }}/.tmux/plugins/tpm"
+  become_user: "{{ (ansible_os_family == 'Debian') | ternary(username_linux, username_mac) }}"
+
