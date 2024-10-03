@@ -1,0 +1,49 @@
+---
+
+- name: Add the Flathub Flatpak repository remote to the system (Linux)
+  community.general.flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+    method: system
+  when: ansible_os_family == "Debian"
+
+- name: Install Flatpak applications (Linux)
+  community.general.flatpak:
+    name:
+      - com.slack.Slack
+      - com.discordapp.Discord
+      - us.zoom.Zoom
+      - md.obsidian.Obsidian
+      - org.gnome.DejaDup
+    method: system
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Define list of apps for MacOS
+  set_fact:
+    macos_apps:
+      - name: slack
+        path: /Applications/Slack.app
+      - name: discord
+        path: /Applications/Discord.app
+      - name: zoom
+        path: /Applications/zoom.us.app
+      - name: obsidian
+        path: /Applications/Obsidian.app
+
+- name: Check if apps are installed
+  stat:
+    path: "{{ item.path }}"
+  loop: "{{ macos_apps }}"
+  register: app_status
+  become: false
+  when: ansible_os_family == "Darwin"
+
+- name: Install missing apps via brew
+  ansible.builtin.homebrew:
+    name: "{{ item.item.name }}"
+  loop: "{{ app_status.results }}"
+  become: false
+  when: ansible_os_family == "Darwin" and not item.stat.exists
+

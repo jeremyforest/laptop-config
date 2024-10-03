@@ -21,7 +21,7 @@
     #- include_tasks: tasks/cron.yml
     - include_tasks: tasks/install-packages.yml
     - include_tasks: tasks/upgrade-packages.yml
-    #- include_tasks: tasks/flatpak-install.yml
+    - include_tasks: tasks/other-softwares.yml
     #- include_tasks: tasks/zsh.yml
     #- include_tasks: tasks/ssh.yml
     #- include_tasks: tasks/fstab.yml
@@ -32,9 +32,9 @@
     #- include_tasks: tasks/tabby.yml
     #- include_tasks: tasks/gnome.yml
     #- include_tasks: tasks/install-nerdfonts.yml
-    #- include_tasks: tasks/python-package.yml
+    - include_tasks: tasks/python-package.yml
     #- include_tasks: tasks/nodejs.yml
-    #- include_tasks: tasks/wireguard.yml
+    - include_tasks: tasks/wireguard.yml
     #- include_tasks: tasks/etcher.yml
     #- include_tasks: tasks/terraform.yml
     #- include_tasks: tasks/steam.yml

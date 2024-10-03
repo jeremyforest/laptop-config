@@ -1,8 +1,17 @@
 ---
 
-
-- name: Wireguard - install wireguard throught apt
+- name: Wireguard - install via apt (Linux)
   ansible.builtin.apt:
     pkg:
       - wireguard
+    state: present
+  when: ansible_os_family == "Debian"
   tags: wireguard
+
+- name: Wireguard - install via brew (MacOS)
+  ansible.builtin.homebrew:
+    name: wireguard-tools
+  become: false 
+  when: ansible_os_family == "Darwin"
+  tags: wireguard
+
