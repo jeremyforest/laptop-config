@@ -22,7 +22,7 @@
     - include_tasks: tasks/install-packages.yml
     - include_tasks: tasks/upgrade-packages.yml
     - include_tasks: tasks/other-softwares.yml
-    #- include_tasks: tasks/zsh.yml
+    - include_tasks: tasks/zsh.yml
     #- include_tasks: tasks/ssh.yml
     #- include_tasks: tasks/fstab.yml
     - include_tasks: tasks/nvim.yml

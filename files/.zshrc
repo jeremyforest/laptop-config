@@ -94,7 +94,17 @@ bindkey -v
 alias zshconfig="nvim ~/.zshrc"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias python=/usr/bin/python3
-alias cat=batcat
+
+alias l = "ls -alh"
+
+# in linux batcat == bat in mac
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    # macOS uses 'bat'
+    alias cat="bat"
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    # Linux uses 'batcat'
+    alias cat="batcat"
+fi
 
 # folder shortcut
 alias tutor='cd /mnt/jeremy/MiscProjects/eduLLM'
@@ -102,6 +112,11 @@ alias space='sudo du -h --max-depth=1 . | sort -h 2> /dev/null'
 
 # specific tmux aliases
 alias tls='tmux ls'
+
+# networking aliases
+
+alias wgup = "sudo wg-quick up wg0"
+alias wgdown = "sudo wg-quick down wg0"
 
 # PYTHON STUFF
 # poetry stuff
@@ -112,3 +127,25 @@ autoload -Uz compinit && compinit
 export PATH="$PATH:/home/jeremy/.local/bin"
 export MODULAR_HOME="/home/jeremy/.modular"
 export PATH="/home/jeremy/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
+
+
+# MAC STUFF
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/jforest/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/jforest/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/jforest/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/jforest/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+export PATH=/Users/jforest/bin:/usr/local/bin:/Users/jforest/Documents/quartz/envs/quartz-macos/bin:/Users/jforest/anaconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin
+
+# Starship
+eval "$(starship init zsh)"
