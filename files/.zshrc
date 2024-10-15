@@ -93,9 +93,9 @@ bindkey -v
 #
 alias zshconfig="nvim ~/.zshrc"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
-alias python=/usr/bin/python3
+alias python="/usr/bin/python3"
 
-alias l = "ls -alh"
+alias l="ls -alh"
 
 # in linux batcat == bat in mac
 if [[ "$OSTYPE" == "darwin"* ]]; then
