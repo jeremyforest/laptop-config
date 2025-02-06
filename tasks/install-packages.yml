@@ -38,6 +38,7 @@
     - cmake
     - gettext
     - bat
+    - pipx
     state: present
   become: false
   when: ansible_os_family == "Darwin"

@@ -75,8 +75,8 @@ plugins=(ansible docker docker-compose git poetry pre-commit python rsync tmux u
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
 export PATH="/usr/local/bin:$PATH"
+
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -119,9 +119,10 @@ alias wgup="sudo wg-quick up wg0"
 alias wgdown="sudo wg-quick down wg0"
 
 # PYTHON STUFF
-# poetry stuff
+# poetry stufffpath+=~/.zfunc
 fpath+=~/.zfunc
 autoload -Uz compinit && compinit
+alias poetry='~/.local/bin/poetry'
 
 # Created by `pipx` on 2024-04-03 16:53:52
 export PATH="$PATH:/home/jeremy/.local/bin"

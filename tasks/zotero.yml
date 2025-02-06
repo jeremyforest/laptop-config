@@ -1,9 +1,15 @@
 ---
-
-- name: Install Zotero using flatpak 
+- name: Install Zotero on Linux (Flatpak)
   community.general.flatpak:
     name:
       - org.zotero.Zotero
-    method: system 
+    method: system
     state: present
+  when: ansible_os_family == "Debian"  # or other Linux distro families
 
+- name: Install Zotero on macOS (Homebrew)
+  ansible.builtin.homebrew:
+    name: zotero
+    state: present
+  when: ansible_os_family == "Darwin"
+  become: false
