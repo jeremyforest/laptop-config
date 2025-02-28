@@ -7,7 +7,7 @@
   when: ansible_os_family == "Debian"
 
 - name: Homebrew upgrade (macOS)
-  homebrew:
+  ansible.builtin.homebrew:
     update_homebrew: yes
     upgrade: true
   when: ansible_os_family == "Darwin"

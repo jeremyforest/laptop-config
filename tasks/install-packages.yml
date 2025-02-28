@@ -34,10 +34,14 @@
   homebrew:
     name:
     - htop
+    - btop
     - neovim
     - cmake
     - gettext
     - bat
+    - pipx
+    - lazygit
+    - gh 
     state: present
   become: false
   when: ansible_os_family == "Darwin"

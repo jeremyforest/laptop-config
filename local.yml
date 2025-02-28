@@ -3,15 +3,16 @@
 - hosts: all
   become: true
   connection: local
+  gather_facts: true
 
   pre_tasks:
     - name: update repositories (Linux)
-      apt:
+      ansible.builtin.apt:
         update_cache=yes
       when: ansible_os_family == "Debian"
 
     - name: update repositories (MacOS)
-      homebrew:
+      ansible.builtin.homebrew:
         update_homebrew: yes
       become: false # cant use sudo with homebrew
       when: ansible_os_family == "Darwin"
@@ -39,3 +40,4 @@
     #- include_tasks: tasks/terraform.yml
     #- include_tasks: tasks/steam.yml
     - include_tasks: tasks/alacritty.yml
+    - include_tasks: tasks/zotero.yml
